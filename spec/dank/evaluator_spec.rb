@@ -9,7 +9,7 @@ describe Dank::Evaluator do
     context 'when given an evaluable expression' do
 
       let(:expression) { 'any_lowercase_letters' }
-      let(:dank_expression) { Dank::Expression.new(regex: /[a-z]*/, expression: 'any_lowercase_letters') }
+      let(:dank_expression) { Dank::Models::Expression.new(regex: /[a-z]*/, expression: 'any_lowercase_letters') }
 
       it 'returns a Dank::Expression' do
         expect(subject).to eq dank_expression
@@ -21,7 +21,7 @@ describe Dank::Evaluator do
       let(:expression) { '' }
 
       it 'raises an error' do
-        expect{subject}.to raise_error Dank::UnknownExpressionException
+        expect{subject}.to raise_error Dank::Exceptions::UnknownExpression
       end
     end
   end
@@ -33,7 +33,7 @@ describe Dank::Evaluator do
     context 'when given an evaluable regex' do
 
       let(:regex) { /[a-z]*/ }
-      let(:dank_expression) { Dank::Expression.new(regex: /[a-z]*/, expression: 'any_lowercase_letters') }
+      let(:dank_expression) { Dank::Models::Expression.new(regex: /[a-z]*/, expression: 'any_lowercase_letters') }
 
       it 'returns a Dank::Expression' do
         expect(subject).to eq dank_expression
@@ -45,7 +45,7 @@ describe Dank::Evaluator do
       let(:regex) { '' }
 
       it 'raises an error' do
-        expect{subject}.to raise_error Dank::UnknownRegexException
+        expect{subject}.to raise_error Dank::Exceptions::UnknownRegex
       end
     end
   end

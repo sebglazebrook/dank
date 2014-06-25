@@ -1,8 +1,8 @@
 require "dank/version"
 require "dank/evaluator"
-require "dank/expression"
-require "dank/unknown_expression_exception"
-require "dank/unknown_regex_exception"
+require "dank/models/expression"
+require "dank/exceptions/unknown_expression"
+require "dank/exceptions/unknown_regex"
 
 module Dank
 

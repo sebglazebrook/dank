@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Dank::Expression do
+describe Dank::Models::Expression do
 
   describe '#==' do
 
     context 'when given a Dank::Expression' do
 
-      let(:dank_expression) {  Dank::Expression.new }
+      let(:dank_expression) {  Dank::Models::Expression.new }
 
       context 'with a matching regex' do
 

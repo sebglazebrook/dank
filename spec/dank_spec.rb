@@ -38,4 +38,22 @@ describe Dank do
       end
     end
   end
+
+  describe 'daisy chaining' do
+
+    context 'given an evaluable expression' do
+
+      let(:expression_one) { 'any_lowercase_letters' }
+
+      context 'and another evaluable expression is chained on' do
+
+        let(:expression_two) { 'any_numbers' }
+
+        it 'combines them to build a new dank expression' do
+          expected_dank = Dank::Models::Expression.new(regex: /[a-z]*\d*/, expression: ['any_lowercase_letters', 'any_numbers'])
+          expect(subject.send(expression_one).send(expression_two)).to eq expected_dank
+        end
+      end
+    end
+  end
 end

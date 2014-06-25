@@ -7,6 +7,10 @@ module Dank
         'any_numbers' => /\d*/,
     }
 
+    def self.can_evaluate?(expression, *args)
+      evaluate(expression, *args).kind_of?(Exception) ? false : true
+    end
+
     def self.evaluate(expression, *args)
       if @@expression_regex_lookup[expression]
         Dank::Models::Expression.new(regex: @@expression_regex_lookup[expression], expression: expression)

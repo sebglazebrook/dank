@@ -26,24 +26,19 @@ describe Dank::Evaluator do
 
     subject { Dank::Evaluator.evaluate_regex(regex) }
 
-    context 'when given an evaluable regex' do
+    context 'when given a regex' do
 
       let(:regex) { /[a-z]*/ }
-      let(:dank_expression) { Dank::Models::Expression.new(regex: /[a-z]*/, expression: 'any_lowercase_letters') }
+      let(:regex_evaluator) { instance_double('Evaluators::RegexEvaluator') }
 
-      it 'returns a Dank::Expression' do
-        expect(subject).to eq dank_expression
+      before do
+        allow(Evaluators::RegexEvaluator).to receive(:new).and_return regex_evaluator
       end
-    end
 
-    context 'when given a non-evaluable expression' do
-
-      let(:regex) { '' }
-
-      it 'raises an error' do
-        expect{subject}.to raise_error Dank::Exceptions::UnknownRegex
+      it 'sends it to the expression evaluator for evaluation' do
+        expect(regex_evaluator).to receive(:evaluate).with regex
+        subject
       end
     end
   end
-
 end

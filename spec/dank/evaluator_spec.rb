@@ -6,22 +6,18 @@ describe Dank::Evaluator do
 
     subject { Dank::Evaluator.evaluate(expression) }
 
-    context 'when given an evaluable expression' do
+    context 'when given an expression' do
 
       let(:expression) { 'any_lowercase_letters' }
-      let(:dank_expression) { Dank::Models::Expression.new(regex: /[a-z]*/, expression: 'any_lowercase_letters') }
+      let(:expression_evaluator) { instance_double('Evaluators::ExpressionEvaluator') }
 
-      it 'returns a Dank::Expression' do
-        expect(subject).to eq dank_expression
+      before do
+        allow(Evaluators::ExpressionEvaluator).to receive(:new).and_return expression_evaluator
       end
-    end
 
-    context 'when given a non-evaluable expression' do
-
-      let(:expression) { '' }
-
-      it 'raises an error' do
-        expect{subject}.to raise_error Dank::Exceptions::UnknownExpression
+      it 'sends it to the expression evaluator for evaluation' do
+        expect(expression_evaluator).to receive(:evaluate).with expression
+        subject
       end
     end
   end

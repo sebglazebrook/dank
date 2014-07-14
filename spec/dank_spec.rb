@@ -27,10 +27,14 @@ describe Dank do
   describe 'evaluable expressions' do
 
     {
+      'any_letters' => /[a-zA-Z]*/,
       'any_lowercase_letters' => /[a-z]*/,
       'any_uppercase_letters' => /[A-Z]*/,
-      'any_numbers' => /\d*/
-
+      'any_numbers' => /\d*/,
+      'at_least_one_number' => /\d+/,
+      'at_least_one_letter' => /[a-zA-Z]+/,
+      'at_least_one_lowercase_letter' => /[a-z]+/,
+      'at_least_one_uppercase_letter' => /[A-Z]+/
     }.each do |expression, regex|
 
       it "evaluates '#{expression}' to: #{regex}" do

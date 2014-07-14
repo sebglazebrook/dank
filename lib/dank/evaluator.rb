@@ -12,11 +12,7 @@ module Dank
     end
 
     def self.evaluate(expression, *args)
-      if @@expression_regex_lookup[expression]
-        Dank::Models::Expression.new(regex: @@expression_regex_lookup[expression], expression: expression)
-      else
-        raise Dank::Exceptions::UnknownExpression.new
-      end
+      Evaluators::ExpressionEvaluator.new.evaluate expression
     end
 
     def self.evaluate_regex(regex)

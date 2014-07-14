@@ -1,5 +1,6 @@
 require "dank/version"
 require "dank/evaluator"
+require "dank/evaluators/expression_evaluator"
 require "dank/models/expression"
 require "dank/exceptions/unknown_expression"
 require "dank/exceptions/unknown_regex"

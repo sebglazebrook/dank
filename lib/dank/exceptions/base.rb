@@ -1,6 +1,6 @@
 module Dank
   module Exceptions
-    class UnknownExpression < Base
+    class Base < Exception
 
     end
   end

@@ -2,7 +2,7 @@ module Dank
   class Evaluator
 
     def self.can_evaluate?(expression, *args)
-      evaluate(expression, *args).kind_of?(Exception) ? false : true
+      evaluate(expression, *args).kind_of?(Dank::Exceptions::Base) ? false : true
     end
 
     def self.evaluate(expression, *args)

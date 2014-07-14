@@ -3,6 +3,7 @@ require "dank/evaluator"
 require "dank/evaluators/expression_evaluator"
 require "dank/evaluators/regex_evaluator"
 require "dank/models/expression"
+require "dank/exceptions/base"
 require "dank/exceptions/unknown_expression"
 require "dank/exceptions/unknown_regex"
 

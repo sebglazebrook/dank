@@ -1,6 +1,6 @@
 module Dank
   module Exceptions
-    class UnknownRegex < Exception
+    class UnknownRegex < Base
 
     end
   end

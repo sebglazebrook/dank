@@ -2,6 +2,56 @@ require 'spec_helper'
 
 describe Dank::Evaluator do
 
+  describe '.can_evaluate?' do
+
+    let(:expression) { 'an expression of some sort' }
+    subject { Dank::Evaluator.can_evaluate?(expression) }
+
+    context 'when given an evaluatable expression' do
+
+      let(:positive_evaluation) { true }
+      let(:expression_evaluator) { instance_double('Evaluators::ExpressionEvaluator') }
+
+      before do
+        allow(Evaluators::ExpressionEvaluator).to receive(:new).and_return expression_evaluator
+        allow(expression_evaluator).to receive(:evaluate).and_return positive_evaluation
+      end
+
+      it 'returns true' do
+        expect(subject).to eq true
+      end
+    end
+
+    context 'when given an un-evaluatable expression' do
+
+      let(:dank_exception) { Dank::Exceptions::Base.new }
+      let(:expression_evaluator) { instance_double('Evaluators::ExpressionEvaluator') }
+
+      before do
+        allow(Evaluators::ExpressionEvaluator).to receive(:new).and_return expression_evaluator
+        allow(expression_evaluator).to receive(:evaluate).and_return dank_exception
+      end
+
+      it 'returns false' do
+        expect(subject).to eq false
+      end
+    end
+
+    context 'an evaluation causes an unknown exception' do
+
+      let(:expression_evaluator) { instance_double('Evaluators::ExpressionEvaluator') }
+
+      before do
+        allow(Evaluators::ExpressionEvaluator).to receive(:new).and_return expression_evaluator
+        allow(expression_evaluator).to receive(:evaluate).and_raise NoMethodError
+      end
+
+      it 'throws an error' do
+        expect{subject}.to raise_error(NoMethodError)
+      end
+    end
+  end
+
   describe '.evaluate' do
 
     subject { Dank::Evaluator.evaluate(expression) }

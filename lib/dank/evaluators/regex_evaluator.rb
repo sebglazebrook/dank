@@ -1,6 +1,6 @@
 module Evaluators
   class RegexEvaluator
-    
+
     def evaluate regex
       if expression_regex_lookup.invert[regex]
         Dank::Models::Expression.new(regex: regex, expression: expression_regex_lookup.invert[regex])

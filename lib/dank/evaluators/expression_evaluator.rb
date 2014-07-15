@@ -38,8 +38,7 @@ module Evaluators
 
     def evaluate_next
       expression = next_expression
-      response = Dank::Lookups::ExpressionRegexLookup.lookup(expression)
-      if response
+      if response = Dank::Lookups::ExpressionRegexLookup.lookup(expression)
         evaluations << Dank::Models::Expression.new(regex: response, expression: expression)
         if original_expression.match(/(.*)_#{expression}/)
           self.left_to_evaluate = original_expression.match(/(.*)_#{expression}/)[1]
@@ -50,13 +49,8 @@ module Evaluators
     end
 
     def next_expression
-      if left_to_evaluate == original_expression
-        expression = original_expression
-        remove_a_word
-      else
-        expression = left_to_evaluate
-        remove_a_word
-      end
+      expression = (left_to_evaluate == original_expression ? original_expression : left_to_evaluate)
+      remove_a_word
       expression
     end
 

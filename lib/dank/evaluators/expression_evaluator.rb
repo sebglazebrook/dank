@@ -3,21 +3,17 @@ require 'kapture'
 module Evaluators
   class ExpressionEvaluator
 
-    attr_reader :original_expression, :evaluations
-    attr_accessor :left_to_evaluate
+    attr_reader :evaluations
+    attr_accessor :left_to_evaluate, :original_expression
 
     def initialize(expression)
       self.original_expression = expression
+      self.left_to_evaluate = expression
     end
 
     def evaluate
       evaluate_next while more_to_evaluate?
       full_evaluation
-    end
-
-    def original_expression= expression
-      self.left_to_evaluate = expression
-      @original_expression = expression
     end
 
     def evaluations

@@ -17,6 +17,8 @@ module Dank
             'uppercase_letters' => '[A-Z]',
             'numbers' => '\d',
             'number' => '\d',
+            'characters' => '\w',
+            'character' => '\w',
             'letter' => '[a-zA-Z]',
             'lowercase_letter' => '[a-z]',
             'uppercase_letter' => '[A-Z]',

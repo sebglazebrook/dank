@@ -4,7 +4,7 @@ describe Evaluators::ExpressionEvaluator do
 
   describe '#evaluate' do
 
-    subject { Evaluators::ExpressionEvaluator.new.evaluate(expression) }
+    subject { Evaluators::ExpressionEvaluator.new(expression).evaluate }
 
     context 'when given an expression' do
 

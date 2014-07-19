@@ -62,11 +62,11 @@ describe Dank::Evaluator do
       let(:expression_evaluator) { instance_double('Evaluators::ExpressionEvaluator') }
 
       before do
-        allow(Evaluators::ExpressionEvaluator).to receive(:new).and_return expression_evaluator
+        allow(Evaluators::ExpressionEvaluator).to receive(:new).with(expression).and_return expression_evaluator
       end
 
       it 'sends it to the expression evaluator for evaluation' do
-        expect(expression_evaluator).to receive(:evaluate).with expression
+        expect(expression_evaluator).to receive(:evaluate)
         subject
       end
     end

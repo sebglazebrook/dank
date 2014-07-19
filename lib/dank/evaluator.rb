@@ -6,7 +6,7 @@ module Dank
     end
 
     def self.evaluate(expression, *args)
-      Evaluators::ExpressionEvaluator.new.evaluate expression
+      Evaluators::ExpressionEvaluator.new(expression).evaluate
     end
 
     def self.evaluate_regex(regex)

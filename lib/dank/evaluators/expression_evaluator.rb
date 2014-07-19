@@ -6,8 +6,11 @@ module Evaluators
     attr_reader :original_expression, :evaluations
     attr_accessor :left_to_evaluate
 
-    def evaluate expression
+    def initialize(expression)
       self.original_expression = expression
+    end
+
+    def evaluate
       evaluate_next while more_to_evaluate?
       full_evaluation
     end

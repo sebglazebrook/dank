@@ -1,3 +1,5 @@
+require 'kapture'
+
 module Dank
   module Models
     class Expression
@@ -46,8 +48,8 @@ module Dank
       end
 
       def merge_regex(new_regex)
-        current_string = regex.to_s.match(/\(\?-mix:(.*)\)/)[1]
-        new_string = new_regex.to_s.match(/\(\?-mix:(.*)\)/)[1]
+        current_string = regex.to_s.capture_first(/\(\?-mix:(.*)\)/)
+        new_string = new_regex.to_s.capture_first(/\(\?-mix:(.*)\)/)
         @regex = Regexp.new(current_string + new_string)
       end
     end

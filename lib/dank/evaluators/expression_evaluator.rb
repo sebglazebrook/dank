@@ -1,3 +1,5 @@
+require 'kapture'
+
 module Evaluators
   class ExpressionEvaluator
 
@@ -40,11 +42,7 @@ module Evaluators
       expression = next_expression
       if response = Dank::Lookups::ExpressionRegexLookup.lookup(expression)
         evaluations << Dank::Models::Expression.new(regex: response, expression: expression)
-        if original_expression.match(/(.*)_#{expression}/)
-          self.left_to_evaluate = original_expression.match(/(.*)_#{expression}/)[1]
-        else
-          self.left_to_evaluate = nil
-        end
+        self.left_to_evaluate = original_expression.capture_first(/(.*)_#{expression}/)
       end
     end
 
@@ -55,9 +53,7 @@ module Evaluators
     end
 
     def remove_a_word
-      if left_to_evaluate.match(/_(.*)$/)
-        self.left_to_evaluate = left_to_evaluate.match(/_(.*)$/)[1]
-      end
+      self.left_to_evaluate = left_to_evaluate.capture_first(/_(.*)$/)
     end
   end
 end

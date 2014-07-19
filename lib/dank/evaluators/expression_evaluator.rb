@@ -10,7 +10,7 @@ module Evaluators
       full_evaluation
     end
 
-    def original_expression=(expression)
+    def original_expression= expression
       self.left_to_evaluate = expression
       @original_expression = expression
     end
